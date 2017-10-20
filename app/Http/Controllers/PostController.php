@@ -74,10 +74,10 @@ class PostController extends Controller
         return redirect("admin/new-post")->with('thongbao','Thêm thành công');
     }
     public function getAllposst(){
-         $data['allpost'] = post::all();
-         $data['image'] = Image::all();
-         $data['category'] = category::all();
-        return view('admin.list-post',$data);
+         $allpost = post::all();
+         $images = Image::all();
+         $category = category::all();
+        return view('admin.list-post', compact('allpost','images','category'));
     }
     public function getTag(){
          $data['tags'] = Tags::all();
