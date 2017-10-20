@@ -4,16 +4,16 @@
 
 @if(count($errors)>0)
 <div class="alert alert-danger">
-    @foreach($errors->all() as $err)
-        {{$err}}<br>
-    @endforeach
+	@foreach($errors->all() as $err)
+		{{$err}}<br>
+	@endforeach
 </div>
 @endif
 
 @if(session('thongbao'))
 
 <div class="alert alert-success">
-    {{session('thongbao')}}
+	{{session('thongbao')}}
 </div>
 @endif
 <form action="{{url('admin/new-post')}}" enctype="multipart/form-data" method="POST">
@@ -31,27 +31,27 @@
 			
 			
 				<div class="control-group">
-				  	<label class="control-label" for="typeahead">Tiêu đề </label>
-				  	<div class="controls">
+					<label class="control-label" for="typeahead">Tiêu đề </label>
+					<div class="controls">
 						<input type="text" class="span12 typeahead" name="title_post" id="title_post"  >
-				  	</div>
+					</div>
 				</div>
 				<div class="control-group">
-                    <label class="control-label" for="typeahead">Nội dung</label>
-                    <textarea id="demo" name="Content" rows="2"></textarea>
-                    <script type="text/javascript" >
-                        
-                        var content = CKEDITOR.replace( 'Content', {
-                        language:'vi',
-                        filebrowserBrowseUrl: '{{ url('/') }}/ckfinder/ckfinder.html',
-                        filebrowserUploadUrl: '{{ url('/') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-                        filebrowserImageBrowseUrl : '{{ url('/') }}/ckfinder/ckfinder.html?type=Images',
-                        filebrowserImageUploadUrl : '{{ url('/') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                        });
+					<label class="control-label" for="typeahead">Nội dung</label>
+					<textarea id="demo" name="Content" rows="2"></textarea>
+					<script type="text/javascript" >
+						
+						var content = CKEDITOR.replace( 'Content', {
+						language:'vi',
+						filebrowserBrowseUrl: '{{ url('/') }}/ckfinder/ckfinder.html',
+						filebrowserUploadUrl: '{{ url('/') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+						filebrowserImageBrowseUrl : '{{ url('/') }}/ckfinder/ckfinder.html?type=Images',
+						filebrowserImageUploadUrl : '{{ url('/') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+						});
 
-                        
-                    </script>
-                </div>
+						
+					</script>
+				</div>
 		</div>
 	</div><!--/span-->
 	<div class=" span4 " ontablet="span6">
@@ -82,24 +82,24 @@
 					function danmuclist($danhmuclist, $parent_idd = 0, $char = '')
 						{
 						foreach ($danhmuclist as $key => $dm)
-						    {
-						        // Nếu là chuyên mục con thì hiển thị
-						        if ($dm['parent_id'] == $parent_idd)
-						        {?>
+							{
+								// Nếu là chuyên mục con thì hiển thị
+								if ($dm['parent_id'] == $parent_idd)
+								{?>
 									<option value="{{$dm->id}}"><?php echo $char;?>{{$dm->title}}</option>  
-						        <?php 
-						            // Xóa chuyên mục đã lặp
-						            unset($danhmuclist[$key]);
-						            // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-						            danmuclist($danhmuclist, $dm['id'], $char.' --  ');
-						    	}
-						 	}
+								<?php 
+									// Xóa chuyên mục đã lặp
+									unset($danhmuclist[$key]);
+									// Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+									danmuclist($danhmuclist, $dm['id'], $char.' --  ');
+								}
+							}
 						}
 							echo '<select class="name-category" name="category_post">';
 							echo danmuclist($category);
 							echo '</select>';
-					  	?>
-					 	
+						?>
+						
 					</div>
 				  </div>        
 			</div>
@@ -116,17 +116,13 @@
 				<div class="control-group">
 					<label class="control-label" for="selectError1">Chọn thẻ tags</label>
 					<div class="controls">
-					  <select id="selectError1" name="tags" multiple data-rel="chosen">
-					  @php $i=1; @endphp
-					  @foreach($tags as $tag)
-					  @php $i++; @endphp
-
-						<option value="{{$tag->id}}">{{$tag->title}}</option>
-						@endforeach
-						
-					  </select>
+							@php $i=1; @endphp
+							@foreach($tags as $tag)
+								@php $i++; @endphp
+								<p><input type="checkbox" name="tags[]" id="tag-{{$tag->id}}" value="{{$tag->id}}"> {{$tag->title}} </p>
+							@endforeach
 					</div>
-				  </div>       
+				</div>
 			</div>
 		<!-- </div> -->	
 		<div class="box">
@@ -144,7 +140,7 @@
 						<input class="input-file uniform_on" name="img_post" id="fileInput" type="file">
 					  </div>
 					</div>  
-				         
+						 
 			</div>
 		</div>	
 	</div>
