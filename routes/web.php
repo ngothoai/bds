@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin','middleware' => 'CheckAdmin'], function(){
 	Route::get('new-post', 'PostController@getAddpost');
 	Route::post('new-post', 'PostController@postAddpost');
 	Route::get('all-post', 'PostController@getAllposst');
+	Route::get('edit-post/{id}', 'PostController@getEditpost');
+	Route::post('edit-post/{id}', 'PostController@postEditpost');
 	Route::get('them-tag', 'PostController@getTag');
 	Route::post('them-tag', 'PostController@postTag');
 	Route::get('edit-account/{id}', 'PageController@get_myacount');

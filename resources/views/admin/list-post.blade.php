@@ -24,7 +24,7 @@
                 </thead>   
                 <tbody>
                     
-                    @foreach($allpost as $post)
+                    @foreach($all_post as $post)
                     
                     <tr>
                         
@@ -34,7 +34,7 @@
                             <img src="{{url('uploads/posts/'.$post->images->name_file)}}">
                         </td>
                         <td class="center ">
-                            <a class="btn btn-info" title="view" href=''>
+                            <a class="btn btn-info" title="view" href='edit-post/{{$post->id}}'>
                                 <i class="halflings-icon white edit"></i>  
                             </a>
                             <a class="btn btn-danger blockU" title="block"  href="" onclick="myFun(this);return false">

@@ -124,10 +124,10 @@
 					</div>
 				</div>
 			</div>
-		<!-- </div> -->	
+		</div>
 		<div class="box">
 			<div class="box-header" data-original-title>
-				<h2><i class=" halflings-icon share-alt"></i><span class="break"></span>Upload Image</h2>
+				<h2><i class=" halflings-icon share-alt"></i><span class="break"></span>Upload Ảnh</h2>
 				<div class="box-icon">
 					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
@@ -135,11 +135,11 @@
 			</div>
 			<div class="box-content" >
 				<div class="control-group">
-					  <label class="control-label" for="fileInput">Upload image</label>
+					  <label class="control-label" for="fileInput">Upload Ảnh</label>
 					  <div class="controls">
 						<input class="input-file uniform_on" name="img_post" id="fileInput" type="file">
 					  </div>
-					</div>  
+				</div>  
 						 
 			</div>
 		</div>	
