@@ -34,8 +34,6 @@ class PostController extends Controller
             'img-post.mimes' =>'Bạn phải nhập ảnh đúng định dạng jpeg,png,gif,jpg',
             'img-post.max' =>'Bạn nhập ảnh không được quá 4MB',
         ]);
-         //Tag
-        $alltag = $req->tags;
         $new_post = new Post;
         $new_post->title = $req->title_post;
         $new_post->slug = str_slug($req->title_post, '-');
@@ -74,10 +72,73 @@ class PostController extends Controller
         return redirect("admin/new-post")->with('thongbao','Thêm thành công');
     }
     public function getAllposst(){
-         $allpost = post::all();
+         $all_post = post::all();
          $images = Image::all();
          $category = category::all();
-        return view('admin.list-post', compact('allpost','images','category'));
+        return view('admin.list-post', compact('all_post','images','category'));
+    }
+    //Edit post
+     public function getEditpost($id){
+         $post = post::find($id);
+         $idpost = $id;
+         $category = category::all();
+         $tagall = Tag_post::all();
+         $tags = Tag_post::find($id);
+        return view('admin.edit-post', compact('post','tags','idpost','category','tagall'));
+    }
+     public function postEditpost(Request $req, $id){
+        $id_user = Auth::user()->id;
+        $this->validate($req,
+        [
+            'title_post' => 'required|min:6|max:200',
+            'Content' => 'required|max:2000',
+            'img_post' => 'mimes:jpeg,png,jpg,gif|max:4000',
+        ],
+        [
+            'title_post.min' =>'Bạn nên nhập ít nhất 6 ký tự',
+            'title_post.max' =>'Bạn không nên nhập quá 120 ký tự',
+            'Content.max' =>'Bạn không nên nhập quá 2000 ký tự',
+            'img-post.mimes' =>'Bạn phải nhập ảnh đúng định dạng jpeg,png,gif,jpg',
+            'img-post.max' =>'Bạn nhập ảnh không được quá 4MB',
+        ]);
+        $new_post =  Post::find($id);
+        $new_post->title = $req->title_post;
+        $new_post->slug = str_slug($req->title_post, '-');
+        $new_post->content = $req->Content;
+        $new_post->idcat = $req->category_post;
+        $new_post->idUser = $id_user;
+        $new_post->save();
+        $idd = $new_post->id;
+        $new_image = new Image;
+        if($req->hasFile('img_post')){
+            $file = $req->file('img_post');
+            $name = $file->getClientOriginalName();
+            $tenHinh = time().'_'.str_random(4)."_".$name;
+            while(file_exists("uploads/posts/".$tenHinh)){
+                $tenHinh = str_random(4)."_".$name;
+            }
+            $file->move("uploads/posts",$tenHinh);
+            $new_image->name_file = $tenHinh;
+        }
+        $new_image->type_image = "thumnail";
+        $new_image->id_post = $idd;
+        $new_image->save();
+        //Tag
+        $tag_remove = Tag_post::where('id_post',$id)->get();
+        $tag_remove->delete();
+        $alltag = $req->tags;
+        if(is_array($alltag))
+        {
+            foreach ($alltag as $key => $value) {
+                $new_tag = new Tag_post;
+                $new_tag->id_tag = $value;
+                $new_tag->id_post = $id;
+                $new_tag->type_post = "post";
+                $new_tag->save();
+            }
+        }
+
+        return redirect("admin/edit-post/".$id)->with('thongbao','Sửa thành công');
     }
     public function getTag(){
          $data['tags'] = Tags::all();
