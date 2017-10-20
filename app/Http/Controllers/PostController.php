@@ -8,6 +8,7 @@ use App\category;
 use App\User;
 use App\post;
 use App\Image;
+use App\Tag_post;
 use Auth;
 class PostController extends Controller
 {
@@ -33,6 +34,8 @@ class PostController extends Controller
             'img-post.mimes' =>'Bạn phải nhập ảnh đúng định dạng jpeg,png,gif,jpg',
             'img-post.max' =>'Bạn nhập ảnh không được quá 4MB',
         ]);
+         //Tag
+        $alltag = $req->tags;
         $new_post = new Post;
         $new_post->title = $req->title_post;
         $new_post->slug = str_slug($req->title_post, '-');
@@ -55,13 +58,26 @@ class PostController extends Controller
         $new_image->type_image = "thumnail";
         $new_image->id_post = $id;
         $new_image->save();
+        //Tag
+        $alltag = $req->tags;
+        if(is_array($alltag))
+        {
+            foreach ($alltag as $key => $value) {
+                $new_tag = new Tag_post;
+                $new_tag->id_tag = $value;
+                $new_tag->id_post = $id;
+                $new_tag->type_post = "post";
+                $new_tag->save();
+            }
+        }
+
         return redirect("admin/new-post")->with('thongbao','Thêm thành công');
     }
     public function getAllposst(){
-         $data['allpost'] = post::all();
-         $data['image'] = Image::all();
-         $data['category'] = category::all();
-        return view('admin.list-post',$data);
+         $allpost = post::all();
+         $images = Image::all();
+         $category = category::all();
+        return view('admin.list-post', compact('allpost','images','category'));
     }
     public function getTag(){
          $data['tags'] = Tags::all();
@@ -70,7 +86,6 @@ class PostController extends Controller
     public function postTag(Request $req){
          $this->validate($req,
             [
-                
                 'tag' => 'required|unique:tags,title|min:6|max:30',
             ],
             [

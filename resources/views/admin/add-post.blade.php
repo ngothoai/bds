@@ -116,13 +116,11 @@
 				<div class="control-group">
 					<label class="control-label" for="selectError1">Chọn thẻ tags</label>
 					<div class="controls">
-						<select id="selectError1" name="tags" multiple data-rel="chosen">
 							@php $i=1; @endphp
 							@foreach($tags as $tag)
 								@php $i++; @endphp
-								<option value="{{$tag->id}}">{{$tag->title}}</option>
+								<p><input type="checkbox" name="tags[]" id="tag-{{$tag->id}}" value="{{$tag->id}}"> {{$tag->title}} </p>
 							@endforeach
-						</select>
 					</div>
 				</div>
 			</div>

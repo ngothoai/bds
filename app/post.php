@@ -12,6 +12,9 @@ class post extends Model
     	return $this->belongsTo('App\category','idcat','id');
     }
     public function images(){
-    	return $this->belongsTo('App\Images','id_post','id');
+    	return $this->hasOne('App\Image','id_post','id');
+    }
+    public function tag_post(){
+        return $this->hasMany('App\Tag_post','id_tag','id');
     }
 }

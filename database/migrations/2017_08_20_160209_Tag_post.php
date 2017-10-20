@@ -17,7 +17,7 @@ class TagPost extends Migration
             $table->increments('id');
             $table->integer('id_tag')->unsigned();
             $table->integer('id_post')->unsigned();
-            $table->integer('type_post');
+            $table->string('type_post');
             $table->timestamps();
             $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('id_tag')->references('id')->on('tags')->onDelete('cascade');

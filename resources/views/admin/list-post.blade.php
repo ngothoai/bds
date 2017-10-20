@@ -31,7 +31,7 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->category->title}}</td>
                         <td>
-                            <img src="{{url('uploads/post/'.$post->images->name_file)}}">
+                            <img src="{{url('uploads/posts/'.$post->images->name_file)}}">
                         </td>
                         <td class="center ">
                             <a class="btn btn-info" title="view" href=''>
