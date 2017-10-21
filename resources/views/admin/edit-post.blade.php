@@ -116,11 +116,10 @@
                 <div class="control-group">
                     <label class="control-label" for="selectError1">Chọn thẻ tags</label>
                     <div class="controls">
-                    <?php dd($tags);?>
+                   
                      <select id="selectError1"  multiple data-rel="chosen">
-                         @foreach($tagall as $tagd)
-                            <option value="{{$tagd->id_tag}}" <?php if($tagd->id_tag === $tags->id_tag){  ?> selected = "selected" <?php }else{}?>>{{$tagd->Tag->title}}</option>
-                       
+                         @foreach($tags as $tagd)
+                            <option value="{{$tagd->id_tag}}">{{$tagd->Tag->title}}</option>
                         @endforeach
                       </select>
                    
