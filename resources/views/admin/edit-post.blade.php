@@ -116,13 +116,20 @@
                 <div class="control-group">
                     <label class="control-label" for="selectError1">Chọn thẻ tags</label>
                     <div class="controls">
-                    @foreach($tagall as $tagd)
-                        <p><input type="checkbox" checked name="tags[]" id="tag-{{$tagd->id}}" value="{{$tagd->id}}"> {{$tagd->Tag->title}} </p>
-                    @endforeach
+                    <?php dd($tags);?>
+                     <select id="selectError1"  multiple data-rel="chosen">
+                         @foreach($tagall as $tagd)
+                            <option value="{{$tagd->id_tag}}" <?php if($tagd->id_tag === $tags->id_tag){  ?> selected = "selected" <?php }else{}?>>{{$tagd->Tag->title}}</option>
+                       
+                        @endforeach
+                      </select>
+                   
+                       
+                   
                     </div>
                 </div>
             </div>
-        <!-- </div> --> 
+        </div> 
         <div class="box">
             <div class="box-header" data-original-title>
                 <h2><i class=" halflings-icon share-alt"></i><span class="break"></span>Upload Ảnh</h2>
