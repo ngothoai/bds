@@ -80,10 +80,10 @@ class PostController extends Controller
     //Edit post
      public function getEditpost($id){
          $post = post::find($id);
-         $idpost = $id;
          $category = category::all();
          $tagall = Tag_post::all();
-         $tags = Tag_post::find($id);
+         $tags = Tag_post::where('id_post',$id)->get();
+         $idpost = $id;
         return view('admin.edit-post', compact('post','tags','idpost','category','tagall'));
     }
      public function postEditpost(Request $req, $id){
