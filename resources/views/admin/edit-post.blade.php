@@ -119,12 +119,9 @@
                    
                      <select id="selectError1"  multiple data-rel="chosen">
                         @foreach($tagall as $tagd)
-                            <option value="{{$tagd->id_tag}}" <?php if($tagd->id_tag = $post->tag_post->id_tag) ?> selected="selected">{{$tagd->Tag->title}}</option>
+                            <option value="{{$tagd->id_tag}}" <?php if($tagd->id_post == $idpost){?> selected="selected" <?php }else{}?>>{{$tagd->Tag->title}}</option>
                         @endforeach
                       </select>
-                   
-                       
-                   
                     </div>
                 </div>
             </div>

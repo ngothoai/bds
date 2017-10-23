@@ -73,9 +73,7 @@ class PostController extends Controller
     }
     public function getAllposst(){
          $all_post = post::all();
-         $images = Image::all();
-         $category = category::all();
-        return view('admin.list-post', compact('all_post','images','category'));
+        return view('admin.list-post', compact('all_post'));
     }
     //Edit post
      public function getEditpost($id){

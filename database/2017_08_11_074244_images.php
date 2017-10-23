@@ -19,7 +19,7 @@ class Images extends Migration
             $table->integer('id_post');
             $table->string('name_file');
             $table->timestamps(); 
-             $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

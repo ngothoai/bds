@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Properties extends Migration
+class PropertyCat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class Properties extends Migration
      */
     public function up()
     {
-         Schema::create('properties', function (Blueprint $table) {
+        Schema::create('propertyCat', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -28,6 +27,6 @@ class Properties extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('propertyCat');
     }
 }
